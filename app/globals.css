@@ -3,25 +3,141 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --fog-bg: #0e121c;
+  --fog-overlay: rgba(14, 18, 28, 0.92);
+  --reveal-glow: #1D9E75;
+
+  --surface: #111827;
+  --surface-raised: #1a2234;
+  --surface-hover: #1f2a3d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.14);
+
+  --text-primary: #f0f4f8;
+  --text-secondary: #8b9ab0;
+  --text-tertiary: #4a5568;
+
+  --accent: #1D9E75;
+  --accent-light: rgba(29, 158, 117, 0.15);
+  --accent-hover: #16876A;
+
+  --danger: #e24b4a;
+  --warning: #ef9f27;
+
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-hero: 56px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  background: var(--fog-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Glassmorphism panel */
+.glass {
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-hover:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mapbox overrides */
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  animation: slideUp 0.3s ease-out, fadeIn 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0;
   }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Count-up number styling */
+.stat-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Progress ring */
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
 }
