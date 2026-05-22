@@ -13,6 +13,8 @@ model User {
   name          String?
   username      String?   @unique
   avatar        String?
+  image         String?
+  emailVerified DateTime?
   isPublic      Boolean   @default(true)
   showOnLeaderboard Boolean @default(true)
   fogRadius     Int       @default(150)

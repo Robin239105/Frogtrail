@@ -58,7 +58,10 @@ export const authOptions: NextAuthOptions = {
       const username = await ensureUniqueUsername(user.name ?? 'explorer')
       await prisma.user.update({
         where: { id: user.id },
-        data: { username },
+        data: { 
+          username,
+          avatar: user.image
+        },
       })
     },
   },
